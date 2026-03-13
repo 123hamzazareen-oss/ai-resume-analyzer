@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Resume Analyzer Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .score {
+            font-size: 35px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            background: #3498db;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .missing {
+            background: #e74c3c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        tr:hover {
+            background: #f2f2f2;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>AI Resume Analyzer Dashboard</h1>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Resume Score</h2>
+
+            <div class="score">{{score}}%</div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Extracted Skills</h2>
+
+            <div class="skills">
+
+                {% for s in skills %}
+                <div class="skill">{{s}}</div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Missing Skills</h2>
+
+            <div class="skills">
+
+                {% for m in missing %}
+                <div class="skill missing">{{m}}</div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Suggestions</h2>
+
+            <ul>
+
+                {% for s in suggestions %}
+                <li>{{s}}</li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Top 5 Job Matches</h2>
+
+            <table>
+
+                <tr>
+                    <th>Rank</th>
+                    <th>Job Role</th>
+                    <th>Match Level</th>
+                    <th>Match Score</th>
+                </tr>
+
+                {% for job in jobs %}
+
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{job.job_id}}</td>
+                    <td>{{job.level}}</td>
+                    <td>{{job.score}}%</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
